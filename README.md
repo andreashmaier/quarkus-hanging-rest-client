@@ -26,42 +26,57 @@ public interface MyRestClient {
 ```
 - http://localhost:8080/timestamp-response
 ```
-    @GET
-    @Path("timestamp-response")
-    @Produces(MediaType.TEXT_PLAIN)
-    public String timestamp() {
-        for (int i = 0; i < 500; i++) {
-            Timestamp timestamp = myRestClient.getTimestamkp();
-            log.debug("response: " + timestamp);
-            log.debug("call number: " + (i + 1));
-        }
-        return "successfully called timestamp endpoint 500 times";
+@GET
+@Path("timestamp-response")
+@Produces(MediaType.TEXT_PLAIN)
+public String timestamp() {
+    for (int i = 0; i < 500; i++) {
+        Timestamp timestamp = myRestClient.getTimestamkp();
+        log.debug("response: " + timestamp);
+        log.debug("call number: " + (i + 1));
     }
+    return "successfully called timestamp endpoint 500 times";
+}
 ```
 - http://localhost:8080/close-response
 ```
-    @GET
-    @Path("close-response")
-    @Produces(MediaType.TEXT_PLAIN)
-    public String closeResponse() {
-        for (int i = 0; i < 500; i++) {
-            Response response = myRestClient.getContent();
-            response.close();
-            log.debug("call number: " + (i + 1));
-        }
-        return "successfully called timestamp endpoint 500 times";
+@GET
+@Path("close-response")
+@Produces(MediaType.TEXT_PLAIN)
+public String closeResponse() {
+    for (int i = 0; i < 500; i++) {
+        Response response = myRestClient.getContent();
+        response.close();
+        log.debug("call number: " + (i + 1));
     }
+    return "successfully called timestamp endpoint 500 times";
+}
 ```
 - http://localhost:8080/response-not-closed
 ```
-    @GET
-    @Path("response-not-closed")
-    @Produces(MediaType.TEXT_PLAIN)
-    public String response() {
-        for (int i = 0; i < 500; i++) {
-            Response response = myRestClient.getContent();
-            log.debug("call number: " + (i + 1));
-        }
-        return "Never reached";
+@GET
+@Path("response-not-closed")
+@Produces(MediaType.TEXT_PLAIN)
+public String response() {
+    for (int i = 0; i < 500; i++) {
+        Response response = myRestClient.getContent();
+        log.debug("call number: " + (i + 1));
     }
+    return "Never reached";
+}
+```
+- http://localhost:8080/response-read-entity
+```
+@GET
+@Path("response-read-entity")
+@Produces(MediaType.TEXT_PLAIN)
+public String responseReadEnity() {
+    for (int i = 0; i < 500; i++) {
+        Response response = myRestClient.getContent();
+        Timestamp timestamp= response.readEntity(Timestamp.class);
+        log.debug("read entity: " + timestamp.toString());
+        log.debug("call number: " + (i + 1));
+    }
+    return "successfully called timestamp endpoint 500 times";
+}
 ```

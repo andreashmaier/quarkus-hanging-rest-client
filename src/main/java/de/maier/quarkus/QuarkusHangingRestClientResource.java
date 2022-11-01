@@ -52,4 +52,17 @@ public class QuarkusHangingRestClientResource {
         }
         return "Never reached";
     }
+
+    @GET
+    @Path("response-read-entity")
+    @Produces(MediaType.TEXT_PLAIN)
+    public String responseReadEnity() {
+        for (int i = 0; i < 500; i++) {
+            Response response = myRestClient.getContent();
+            Timestamp timestamp= response.readEntity(Timestamp.class);
+            log.debug("read entity: " + timestamp.toString());
+            log.debug("call number: " + (i + 1));
+        }
+        return "successfully called timestamp endpoint 500 times";
+    }
 }
