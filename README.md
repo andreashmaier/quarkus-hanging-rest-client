@@ -1,12 +1,12 @@
 # Quarkus Hanging REST Client 
 https://adambien.blog/roller/abien/entry/quarkus_hanging_mp_rest_client
 
-## RESTEasy Classic REST Client
+## RESTEasy Reactive REST Client
 
 ```
 <dependency>
     <groupId>io.quarkus</groupId>
-    <artifactId>quarkus-rest-client</artifactId>
+    <artifactId>quarkus-rest-client-reactive</artifactId>
 </dependency>
 ```
 

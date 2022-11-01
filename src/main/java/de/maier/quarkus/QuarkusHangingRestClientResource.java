@@ -50,6 +50,6 @@ public class QuarkusHangingRestClientResource {
             Response response = myRestClient.getContent();
             log.debug("call number: " + (i + 1));
         }
-        return "Never reached";
+        return "successfully called timestamp endpoint 500 times";
     }
 }
